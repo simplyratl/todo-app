@@ -1,0 +1,41 @@
+<div>
+  <form>
+    <input
+      type="text"
+      name="inputTodo"
+      placeholder="Enter todo..."
+      autocomplete="off"
+      [(ngModel)]="inputTodo"
+      class="w-full p-3 text-lg text-black font-bold my-4 rounded-md outline-offset-2 outline-[#ff7ba8] border-none"
+    />
+    <button
+      type="submit"
+      (click)="addTodo()"
+      class="w-full text-lg bg-[#42b7b1] rounded-md h-12 font-bold hover:bg-[#42b7b1]"
+    >
+      Add Todo
+    </button>
+  </form>
+
+  <div
+    [@fadeInOut]="todos.length"
+    *ngFor="let todo of todos; let i = index"
+    class="flex gap-3 justify-between bg-[#21212b] rounded-xl h-full px-8 py-5 mt-2 {{
+      todo.completed ? 'done' : ''
+    }}"
+  >
+    <div class="flex items-center gap-2">
+      <span
+        class="checkbox w-7 h-7 border-[3px] border-[#ff7ba8] rounded-xl cursor-pointer"
+        (click)="toggleDone(i)"
+      ></span>
+      <p class="text-lg">{{ todo.content }}</p>
+    </div>
+    <button class="text-lg hover:text-red-600" (click)="deleteTodo(i)">
+      Remove
+    </button>
+  </div>
+  <span class="block mt-2 text-lg" *ngIf="todos.length === 0" @fadeInEmpty
+    >No todos avaliable.</span
+  >
+</div>
